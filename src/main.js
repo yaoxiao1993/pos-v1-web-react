@@ -1,4 +1,5 @@
-
+import loadAllItems from './database'
+import loadPromotions from './loadPromotions'
 //将选中的所有条码用对象表示，并存入数组，格式：[{ITEM000001:2}，{ITEM000002:1}]，主要目的条码去重，并统计每个条码个数
 function formDuplicatedItem(selectedItem){
     var tempObj = {};
@@ -27,7 +28,7 @@ function formSelectedItem(formedDuplicatedItem){
         var obj = {};
         if (formedDuplicatedItem[i].barcode.substr(11)) {
             obj.barcode = formedDuplicatedItem[i].barcode.substr(0,10);
-            obj.num = parseInt(formedDuplicatedItem[i].barcode.substr(11));
+            obj.num = parseInt(formedDuplicatedItem[i].barcode.substr(11),10);
         } else {
             obj.barcode = formedDuplicatedItem[i].barcode;
             obj.num = formedDuplicatedItem[i].num;
@@ -69,7 +70,7 @@ function getPromotionInfo(selectedItemInfo){
                         obj.price = selectedItemInfo[j].price;
                         obj.freeNum = Math.floor(selectedItemInfo[j].num / 3);
                         promotionInfo.push(obj);
-                        selectedItemInfo[j].actualNum = selectedItemInfo[j].num - parseInt(selectedItemInfo[j].num / 3);
+                        selectedItemInfo[j].actualNum = selectedItemInfo[j].num - parseInt(selectedItemInfo[j].num / 3,10);
                     }
                     break;   
                 }
@@ -114,5 +115,6 @@ function printInventory(selectedItemInfo){
     return output;
 }
 
+export default [formDuplicatedItem,getSelectedItemInfo]
 
 
