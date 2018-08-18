@@ -11,8 +11,8 @@ table,table th,table td{
 table th,table td{
   padding: 5px 20px;
 }
-.itemsList, .cartList{
+.GoodsList, .CartList{
   position: relative;
-  left: 400px;
+  left: 360px;
   margin-bottom: 50px;
 }
