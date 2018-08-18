@@ -11,8 +11,21 @@ table,table th,table td{
 table th,table td{
   padding: 5px 20px;
 }
+table th{
+  background: lightblue;
+}
 .GoodsList, .CartList{
+  position: relative;
+  left: 330px;
+  margin-bottom: 50px;
+}
+.CartList{
   position: relative;
   left: 360px;
   margin-bottom: 50px;
+}
+#figure{
+  font-size:18px;
+  align-self: center;
+  background: lightblue;
 }

@@ -34,7 +34,8 @@ class App extends Component {
                         <th>单位</th>
                         <th>单价</th>
                         <th>优惠信息</th>
-                        <th>数量</th>   
+                        <th>数量</th>
+                        <th>小计</th> 
                     </tr>
                 </thead>
                 <tbody id="CartTbody">{
@@ -45,12 +46,14 @@ class App extends Component {
                     <td>{item.unit}</td>
                     <td>{item.promotion}</td>
                     <td>{item.count}</td>
+                    <td>{parseFloat(item.actualCount*item.price).toFixed(2)}</td>
                   </tr>    
                   )
                 }             
                 </tbody>
             </table>
         </div>
+        <button id="figure" type="submit">确认购买</button>
       </div>
     );
   }
