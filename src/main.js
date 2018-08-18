@@ -115,6 +115,6 @@ function printInventory(selectedItemInfo){
     return output;
 }
 
-export default [formDuplicatedItem,getSelectedItemInfo]
+export {formDuplicatedItem,getSelectedItemInfo}
 
 

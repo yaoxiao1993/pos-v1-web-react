@@ -1,23 +1,18 @@
 import React, { Component } from 'react';
+import ReactDOM from 'react-dom'
 import './App.css';
-import formDuplicatedItem from './main.js';
-import getSelectedItemInfo from './main.js';
 import loadAllItems from './database'
 import loadPromotions from './loadPromotions'
-// import GoodList from './App'
 import $ from 'jquery'
 
-var selectedItem = GoodList.selectedItem;
-var duplicatedItem = formDuplicatedItem(selectedItem);
-var selectedItemInfo = getSelectedItemInfo(duplicatedItem);
+var selectedItem=JSON.parse(localStorage.getItem("selectedItemInfo"));
+console.log(selectedItem)
 var allItems=loadAllItems()
 var promotions=loadPromotions()
-console.log(selectedItemInfo)
 
 class SelectList extends Component {
     constructor(props){
       super(props)
-      this.selectedItem=[];
       // this.delete=this.delete.bind(this)
       // this.add=this.add.bind(this)
       // this.cart=this.cart.bind(this)
@@ -26,7 +21,7 @@ class SelectList extends Component {
     add(e){
       var x = $(e.target).parent().parent().find("td")
       var y = x.eq(0).text()
-      this.selectedItem.push(y)
+      selectedItem.push(y)
       var currentInput = $(e.target).parent().find("input")
       var currentNum = $(e.target).parent().find("input").val()
       var changedNum = parseInt(currentNum,10)+1
@@ -36,9 +31,9 @@ class SelectList extends Component {
     delete(e){
       var x = $(e.target).parent().parent().find("td")
       var y = x.eq(0).text()
-      var isBarcodeExist = $.inArray(y,this.selectedItem)
+      var isBarcodeExist = $.inArray(y,selectedItem)
       if(isBarcodeExist>=0){
-          this.selectedItem.splice(isBarcodeExist,1)
+          selectedItem.splice(isBarcodeExist,1)
           var currentInput = $(e.target).parent().find("input")
           var currentNum = $(e.target).parent().find("input").val()
           var changedNum = parseInt(currentNum,10)-1
@@ -49,15 +44,15 @@ class SelectList extends Component {
     figure(e){
       var x = $(e.target).parent().find("td")
       var y = x.eq(0).text()
-      this.selectedItem.push(y)
+      selectedItem.push(y)
       var z = $(e.target).parent().find("input")
       z.text(parseInt(z.text(),10)+1);
     }
   
     render() {
       return (
-        <div className="GoodsList">
-          <table id="table">
+        <div className="SelectList">
+          <table id="SelectTable">
           <thead>
             <tr>
                 <th>name</th>
@@ -78,7 +73,7 @@ class SelectList extends Component {
     }
   }
   
-  export default SelectList;
+  // ReactDOM.render(<SelectList />, document.getElementById('table_id'));
 
 // $(document).ready(function(){
 //     for(var i in selectedItemInfo){
