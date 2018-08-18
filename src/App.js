@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import './App.css';
 import GoodsList from './GoodsList'
-import Item from './Item'
 
 class App extends Component {
   constructor(){
@@ -35,14 +34,20 @@ class App extends Component {
                         <th>单位</th>
                         <th>单价</th>
                         <th>优惠信息</th>
-                        <th>数量</th>
-                        <th>操作</th>    
+                        <th>数量</th>   
                     </tr>
                 </thead>
-                <tbody id="CartTbody">
-                {
-                  this.state.SelectedItems.map((item,i) => <Item itemrow={item} key={i}/>
-                )}
+                <tbody id="CartTbody">{
+                  this.state.SelectedItems.map((item,i)=><tr>
+                    <td>{item.barcode}</td>
+                    <td>{item.name}</td>
+                    <td>{parseFloat(item.price).toFixed(2)}</td>
+                    <td>{item.unit}</td>
+                    <td>{item.promotion}</td>
+                    <td>{item.count}</td>
+                  </tr>    
+                  )
+                }             
                 </tbody>
             </table>
         </div>
