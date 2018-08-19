@@ -26,6 +26,11 @@ table th{
 }
 #figure{
   font-size:18px;
+  position: relative;
+  left: 320px;
+}
+#buy{
+  font-size:18px;
   align-self: center;
   background: lightblue;
 }

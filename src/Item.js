@@ -20,12 +20,10 @@ class Item extends Component{
     handleAddingCartButton(){
         if (this.props.onAddingCart) {
             const items = this.props.itemrow;
-            items.count = this.state.count
-            this.props.onAddingCart(items)
-            if(items.promotion==='买二送一'){
-                var freeCount = Math.floor(items.count / 3);
-                items.actualCount = items.count-freeCount;
-            }            
+            items.count = this.state.count;
+            items.actualCount = this.state.count;
+            this.props.onAddingCart(items);
+                     
         }
     }
     
