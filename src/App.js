@@ -20,11 +20,7 @@ class App extends Component {
     if(CartItems.length!==0){
       for(var i in CartItems){
         if(CartItems[i].barcode===item.barcode){
-          // item.count+=CartItems[i].count;
-          // item.actualCount+=CartItems[i].actualCount;
           CartItems[i].count+=item.count
-          // CartItems[i].actualCount+=item.actualCount
-          // item.count=CartItems[i].count
           isSameItem = true;
           break;
         }else{
@@ -33,7 +29,6 @@ class App extends Component {
 
       }
       if(item.promotion==='买二送一' && isSameItem===true){
-        // var freeCount = 0;
         var freeCount = Math.floor(CartItems[i].count / 2);
         CartItems[i].freeCount=freeCount
       }
