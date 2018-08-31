@@ -79,7 +79,6 @@ class App extends Component {
                   this.state.SelectedItems.map((item,i)=>{
                   var subTotal = parseFloat(item.count*item.price).toFixed(2)
                   Total = ((Total*100 + subTotal*100)/100).toFixed(2);
-                // Total = Total + subTotal
                   return <tr key={i}>
                     <td>{item.barcode}</td>
                     <td>{item.name}</td>
