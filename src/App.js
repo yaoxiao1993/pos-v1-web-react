@@ -8,7 +8,8 @@ class App extends Component {
     this.state={
       SelectedItems:[],
       Total:0,
-      subTotal:0
+      subTotal:0,
+      freeCount:0
     };
   }
 
@@ -17,13 +18,13 @@ class App extends Component {
     var isSameItem = false;
     var count = 0;
 
-    if(CartItems.length!==0){     
+    if(CartItems.length!==0){
       for(var i in CartItems){
         if(CartItems[i].barcode===item.barcode){
           // item.count+=CartItems[i].count;
           // item.actualCount+=CartItems[i].actualCount;
           CartItems[i].count+=item.count
-          CartItems[i].actualCount+=item.actualCount
+          // CartItems[i].actualCount+=item.actualCount
           // item.count=CartItems[i].count
           isSameItem = true;
           break;
@@ -33,26 +34,23 @@ class App extends Component {
 
       }
       if(item.promotion==='买二送一' && isSameItem===true){
-        var freeCount = Math.floor(CartItems[i].count / 3);
-        CartItems[i].actualCount=CartItems[i].count-freeCount;
-        console.log("1")
-        console.log(CartItems[i].actualCount)
+        // var freeCount = 0;
+        var freeCount = Math.floor(CartItems[i].count / 2);
+        CartItems[i].freeCount=freeCount
+      }else if(item.promotion==='无'){
+        CartItems[i].freeCount=0;
       }
 
-      // console.log(item)
-      console.log(CartItems)
-       
-
+      //count等于CartItems.length，则说明CartItems中没有当前加入的商品
       if(count === CartItems.length){
+        CartItems[i].freeCount=0;
         CartItems.push(item)
       }
     }else{
       CartItems.push(item)
+      CartItems[0].freeCount = 0;  
     }
 
-    
-    
-// console.log(CartItems)
     this.setState({
       SelectedItems: CartItems
     }) 
@@ -75,13 +73,14 @@ class App extends Component {
                         <th>单位</th>
                         <th>单价</th>
                         <th>优惠信息</th>
-                        <th>数量</th>
+                        <th>添加数量</th>
+                        <th>赠送数量</th>
                         <th>小计</th> 
                     </tr>
                 </thead>
                 <tbody id="CartTbody">{ 
                   this.state.SelectedItems.map((item,i)=>{
-                  var subTotal = parseFloat(item.actualCount*item.price).toFixed(2)
+                  var subTotal = parseFloat(item.count*item.price).toFixed(2)
                   Total = ((Total*100 + subTotal*100)/100).toFixed(2);
                 // Total = Total + subTotal
                   return <tr key={i}>
@@ -91,6 +90,7 @@ class App extends Component {
                     <td>{item.unit}</td>
                     <td>{item.promotion}</td>
                     <td>{item.count}</td>
+                    <td>{item.freeCount}</td>
                     <td>{subTotal}</td>
                   </tr>    
                   })
