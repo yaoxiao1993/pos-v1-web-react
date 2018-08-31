@@ -9,7 +9,6 @@ class App extends Component {
       SelectedItems:[],
       Total:0,
       subTotal:0,
-      freeCount:0
     };
   }
 
@@ -37,23 +36,26 @@ class App extends Component {
         // var freeCount = 0;
         var freeCount = Math.floor(CartItems[i].count / 2);
         CartItems[i].freeCount=freeCount
-      }else if(item.promotion==='无'){
-        CartItems[i].freeCount=0;
       }
 
       //count等于CartItems.length，则说明CartItems中没有当前加入的商品
       if(count === CartItems.length){
-        CartItems[i].freeCount=0;
         CartItems.push(item)
       }
     }else{
-      CartItems.push(item)
-      CartItems[0].freeCount = 0;  
+      CartItems.push(item) 
+    }
+
+    for(var j in CartItems){
+      if(CartItems[j].freeCount>0){
+      }else{
+        CartItems[j].freeCount=0
+      }
     }
 
     this.setState({
       SelectedItems: CartItems
-    }) 
+    })
     
   }
 
@@ -99,7 +101,6 @@ class App extends Component {
             </table>
         </div>
         <div id="figure"><span>总计：</span><span>{Total}</span></div>
-        <button id="buy" type="submit">确认购买</button>
       </div>
     );
   }

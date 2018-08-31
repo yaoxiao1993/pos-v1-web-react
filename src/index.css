@@ -14,14 +14,14 @@ table th,table td{
 table th{
   background: lightblue;
 }
-.GoodsList, .CartList{
+.GoodsList{
   position: relative;
-  left: 330px;
+  left: 30%;
   margin-bottom: 50px;
 }
 .CartList{
   position: relative;
-  left: 360px;
+  left: 30%;
   margin-bottom: 50px;
 }
 #figure{
