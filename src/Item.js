@@ -21,7 +21,6 @@ class Item extends Component{
         if (this.props.onAddingCart) {
             const items = this.props.itemrow;
             items.count = this.state.count;
-            items.actualCount = this.state.count;
             this.props.onAddingCart(items);
                      
         }
